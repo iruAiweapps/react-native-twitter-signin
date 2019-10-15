@@ -42,7 +42,8 @@ RCT_EXPORT_METHOD(logIn: (RCTPromiseResolveBlock)resolve
                 resolve(body);
             }];
         } else {
-            reject(@"Error", @"Twitter signin error", error);
+            NSString *errorCode = error.code == 1 ? @"USER_CANCELLED" : @"Error";
+            reject(errorCode, @"Twitter signin error", error);
         }
     }];
 }
